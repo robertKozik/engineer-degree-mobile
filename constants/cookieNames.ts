@@ -1,6 +1,6 @@
 enum cookieNames {
-    token = "TOKEN",
-    refreshToken = "REFRESH",
-};
+  token = "TOKEN",
+  refreshToken = "REFRESH",
+}
 
 export default cookieNames;
