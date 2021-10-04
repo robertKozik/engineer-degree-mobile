@@ -7,7 +7,7 @@ export function getToken(): string {
   return cookies.get(cookieNames.token);
 }
 
-export function setToken(token: string): void {
+export function setToken(token?: string): void {
   return cookies.set(cookieNames.token, token, { path: "/" });
 }
 
@@ -19,7 +19,7 @@ export function getRefreshToken(): string {
   return cookies.get(cookieNames.refreshToken);
 }
 
-export function setRefreshToken(token: string) {
+export function setRefreshToken(token?: string) {
   return cookies.set(cookieNames.refreshToken, token, { path: "/" });
 }
 
