@@ -1,5 +1,3 @@
-enum entities {
-
-}
+enum entities {}
 
 export default entities;

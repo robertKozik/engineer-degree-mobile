@@ -1,8 +1,8 @@
-import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import React from "react";
+import { StyleSheet, Text, View, Button } from "react-native";
 
 interface props {
-    navigation: any
+  navigation: any;
 }
 
 export default function RegisterPage({ navigation }: props) {
@@ -17,8 +17,8 @@ export default function RegisterPage({ navigation }: props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

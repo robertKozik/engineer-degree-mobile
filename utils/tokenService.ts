@@ -8,7 +8,7 @@ export function getToken(): string {
 }
 
 export function setToken(token: string): void {
-  return cookies.set(cookieNames.token, token, { path: '/' });
+  return cookies.set(cookieNames.token, token, { path: "/" });
 }
 
 export function removeToken(): void {
@@ -20,7 +20,7 @@ export function getRefreshToken(): string {
 }
 
 export function setRefreshToken(token: string) {
-  return cookies.set(cookieNames.refreshToken, token, { path: '/' });
+  return cookies.set(cookieNames.refreshToken, token, { path: "/" });
 }
 
 export function removeRefreshToken(): void {
