@@ -1,11 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
-interface props {
-    navigation: any
-}
-
-export default function LoginPage({ navigation }: props) {
+export default function LoginPage() {
   return (
     <View style={styles.container}>
       <Text>Open up App.tsx to start working on your app!</Text>
