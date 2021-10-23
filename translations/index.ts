@@ -1,1 +1,5 @@
-export { default as en } from "./en.json";
+import en from "./en.json";
+
+const translations = { en };
+
+export default translations;
