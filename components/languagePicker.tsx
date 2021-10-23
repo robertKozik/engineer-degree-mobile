@@ -1,49 +1,50 @@
+import { DrawerItem } from "@react-navigation/drawer";
+import { DrawerActions } from "@react-navigation/routers";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Modal, View, Text, Pressable } from "react-native";
+import { Button } from "react-native-elements";
+import Modal, { ModalCloseContext } from "./Modal";
 
-const LanguagePicker = () => {
-  const [modalVisible, setModalVisible] = React.useState(false);
+const LanguagePicker = ({ navigation }: { navigation: any }) => {
   const { i18n } = useTranslation(); // i18n instance
 
   // array with all supported languages
-  const languages = [{ name: "en", label: "English" }];
+  const languages = [
+    { name: "en", label: "English" },
+    { name: "de", label: "German" },
+  ];
 
-  const LanguageItem = ({ name, label }: { name: string; label: string }) => (
-    <Pressable
-      onPress={() => {
-        i18n.changeLanguage(name); //changes the app language
-        setModalVisible(!modalVisible);
-      }}
-    >
-      <Text>{label}</Text>
-    </Pressable>
-  );
+  const LanguageItem = ({ name, label }: { name: string; label: string }) => {
+    const close = React.useContext(ModalCloseContext);
+    return (
+      <Button
+        onPress={() => {
+          i18n.changeLanguage(name); //changes the app language
+          close();
+        }}
+        type="clear"
+        title={label}
+      />
+    );
+  };
 
   return (
-    <View>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <View>
-          <View>
-            {languages.map((lang) => (
-              <LanguageItem {...lang} key={lang.name} />
-            ))}
-          </View>
-        </View>
-      </Modal>
-      <Pressable onPress={() => setModalVisible(true)}>
-        {/* displays the current app language */}
-        <Text>{i18n.language}</Text>
-      </Pressable>
-    </View>
+    <Modal
+      animationType="slide"
+      type="button"
+      triggerStyle={triggerStyle}
+      onOpen={() => navigation.dispatch(DrawerActions.closeDrawer())}
+      title="Langauge"
+    >
+      {languages.map((lang) => (
+        <LanguageItem {...lang} key={lang.name} />
+      ))}
+    </Modal>
   );
+};
+const triggerStyle = {
+  width: "94%",
+  marginHorizontal: "3%",
 };
 
 export default LanguagePicker;
