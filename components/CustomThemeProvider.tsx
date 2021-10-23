@@ -5,7 +5,7 @@ import colorModes from "../constants/colorModes";
 import basicTheme from "../styles/basicTheme";
 
 interface props {
-  children: Array<Node>;
+  children: React.ReactChild | Array<React.ReactChild>;
 }
 
 const CustomThemeProvider = ({ children }: props) => {
