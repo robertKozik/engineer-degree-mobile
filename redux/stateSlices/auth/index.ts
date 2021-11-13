@@ -17,7 +17,10 @@ export const authSlice: Slice<authState> = createSlice({
       })
       .addMatcher(
         isAnyOf(loginUser.rejected, registerUser.rejected),
-        (response) => console.error(response)
+        (state) => {
+          state.isLoginProcessing = false;
+          console.warn("request error");
+        }
       );
   },
 });

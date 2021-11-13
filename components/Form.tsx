@@ -67,11 +67,17 @@ Form.TextInput = function TextInput({
   );
 };
 
-Form.Submit = function SubmitButton() {
+Form.Submit = function SubmitButton({ loading }: { loading: boolean }) {
   const { t } = useTranslation();
   const { handleSubmit } = useFormikContext();
 
-  return <Button onPress={() => handleSubmit()} title={t("register:submit")} />;
+  return (
+    <Button
+      loading={loading}
+      onPress={() => handleSubmit()}
+      title={t("register:submit")}
+    />
+  );
 };
 
 export default Form;
