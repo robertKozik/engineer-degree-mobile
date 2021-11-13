@@ -1,5 +1,7 @@
 import React from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { Text, View } from "react-native";
+import { FAB } from "react-native-elements";
+import styles from "./style";
 
 interface props {
   navigation: any;
@@ -9,16 +11,12 @@ export default function RegisterPage({ navigation }: props) {
   return (
     <View style={styles.container}>
       <Text>Open up App.tsx to start working on your app!</Text>
-      <Button onPress={() => navigation.goBack()} title="Go back home" />
+      <FAB
+        style={styles.fab}
+        onPress={() => navigation.goBack()}
+        placement="right"
+        title="back"
+      />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
