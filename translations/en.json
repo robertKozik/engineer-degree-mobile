@@ -1,5 +1,18 @@
 {
     "app": {
         "hello": "there"
+    },
+    "login": {
+        "title": "log in",
+        "email": "email",
+        "emailInputPlaceholder": "type your mail",
+        "password": "password",
+        "passwordInputPlaceholder": "*** *** ***",
+        "submit": "submit"
+    },
+    "register": {
+        "title": "register",
+        "repassword": "repeat password",
+        "submit": "submit"
     }
 }
