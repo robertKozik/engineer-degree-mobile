@@ -13,7 +13,7 @@ const CustomThemeProvider = ({ children }: props) => {
   const isDark = systemColor === colorModes.dark;
 
   return (
-    <ThemeProvider theme={basicTheme} useDark={isDark}>
+    <ThemeProvider theme={basicTheme(isDark)} useDark={isDark}>
       {children}
     </ThemeProvider>
   );
