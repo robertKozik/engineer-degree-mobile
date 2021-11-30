@@ -6,6 +6,9 @@ import {
   temperatureEntry,
   user,
 } from "../interfaces";
+import { store } from "../redux/store";
+import * as SecureStore from "expo-secure-store";
+import { getToken } from "../utils/tokenService";
 import AxiosProvider from "./AxiosProvider";
 
 class CoreApi {
@@ -25,6 +28,7 @@ class CoreApi {
 
   setEndpointUrl(url: string) {
     this.api.defaults.baseURL = `${this.baseUrl}/${url}`;
+    console.log(this.api.defaults.baseURL);
   }
 
   setInterceptors(
@@ -40,12 +44,21 @@ class CoreApi {
       | informationNode,
     responseError: (error: AxiosError) => Promise<AxiosError>
   ) {
-    this.api.interceptors.request.use(beforeRequest, requestError);
+    // this.api.interceptors.request.use(beforeRequest, requestError);
+    this.api.interceptors.request.use(
+      async (config) => {
+        const token = await SecureStore.getItemAsync("token");
+        console.log(token);
+        if (token) {
+          config.headers.Authorization = "Bearer " + token;
+        }
+        return config;
+      },
+      (error) => {
+        return Promise.reject(error);
+      }
+    );
     this.api.interceptors.response.use(afterResponse, responseError);
-  }
-
-  beforeRequest(config: AxiosRequestConfig): AxiosRequestConfig {
-    return config;
   }
 
   afterResponse(response: any): AxiosResponse {
@@ -57,6 +70,9 @@ class CoreApi {
   }
   responseError(error: AxiosError): Promise<AxiosError> {
     throw error;
+  }
+  getToken() {
+    return getToken();
   }
 }
 

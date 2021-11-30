@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   loginPayload,
   loginResponse,
@@ -8,12 +9,13 @@ import CoreApi from "../CoreApi";
 
 class AuthService extends CoreApi {
   constructor(endpoint: string) {
-    super(endpoint);
+    super();
+    this.setEndpointUrl(endpoint);
   }
 
-  login({ email, password }: loginPayload): Promise<loginResponse> {
-    //TODO login
-    throw { email, password };
+  login(payload: loginPayload): any {
+    return this.api.post("login", payload);
+    // return axios.post('http://192.168.0.102:4000/api/login', payload);
   }
 
   register({ email, password, username }: registerPayload): Promise<any> {
@@ -21,15 +23,11 @@ class AuthService extends CoreApi {
     throw { email, password, username };
   }
 
-  fetchUser(): Promise<user> {
-    //TODO fetch user
-    throw {
-      email: "email",
-      connectedNodes: [],
-    };
+  fetchUser(): any {
+    return this.api.get("users");
   }
 }
 
-const instance = new AuthService("/auth");
+const instance = new AuthService("api/");
 
 export default instance;
