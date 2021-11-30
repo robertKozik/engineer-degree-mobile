@@ -7,6 +7,7 @@ enum routes {
   moduleOverview = "module/overview",
   moduleCharts = "module/charts",
   moduleList = "module/lust",
+  moduleConfig = "module/config",
 }
 
 export default routes;

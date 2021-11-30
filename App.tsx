@@ -4,7 +4,6 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import CustomThemeProvider from "./components/CustomThemeProvider";
 import "./i18n.config";
 import Navigation from "./routes";
-import { AppRegistry } from "react-native";
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
 
@@ -19,7 +18,5 @@ const App = () => {
     </Provider>
   );
 };
-
-AppRegistry.registerComponent("main", () => App);
 
 export default App;

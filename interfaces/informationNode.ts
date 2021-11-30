@@ -1,7 +1,7 @@
 interface informationNode {
   name: string;
   localization: any;
-  serialNumber: string;
+  serial_id: string;
 }
 
 export default informationNode;
