@@ -5,11 +5,13 @@ import AuthService from "../../../api/services/AuthService";
 const loginUser = createAsyncThunk(
   "auth/login",
   async (payload: loginPayload) => {
-    const { token } = await AuthService.login(payload);
-    const user = await AuthService.fetchUser();
-    return { ...user, token };
+    return await AuthService.login(payload);
   }
 );
+
+const fetchUser = createAsyncThunk("auth/get_user", async () => {
+  return await AuthService.fetchUser();
+});
 
 const registerUser = createAsyncThunk(
   "auth/register",
@@ -20,4 +22,4 @@ const registerUser = createAsyncThunk(
   }
 );
 
-export { loginUser, registerUser };
+export { loginUser, registerUser, fetchUser };

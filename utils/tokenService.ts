@@ -1,28 +1,17 @@
-import Cookies from "universal-cookie/es6";
-import cookieNames from "../constants/cookieNames";
+/* eslint-disable eslint-comments/no-unlimited-disable */
+/* eslint-disable */
+import * as SecureStore from "expo-secure-store";
 
-const cookies = new Cookies();
-
-export function getToken(): string {
-  return cookies.get(cookieNames.token);
+export async function getToken(): string {
+  const token = await SecureStore.getItemAsync("token");
+  return token || "";
 }
 
-export function setToken(token?: string): void {
-  return cookies.set(cookieNames.token, token, { path: "/" });
+export async function setToken(token: string): Promise<void> {
+  console.log(token);
+  return await SecureStore.setItemAsync("token", token);
 }
 
-export function removeToken(): void {
-  return cookies.remove(cookieNames.token);
-}
-
-export function getRefreshToken(): string {
-  return cookies.get(cookieNames.refreshToken);
-}
-
-export function setRefreshToken(token?: string) {
-  return cookies.set(cookieNames.refreshToken, token, { path: "/" });
-}
-
-export function removeRefreshToken(): void {
-  return cookies.remove(cookieNames.refreshToken);
+export async function removeToken(): Promise<void> {
+  return await SecureStore.deleteItemAsync("token");
 }
