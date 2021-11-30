@@ -25,7 +25,7 @@ const Login = ({
         </Card.Title>
         <Card.Divider />
         <Form
-          initialValues={{ email: "test", password: "test" }}
+          initialValues={{ email: "testowy15@test.com", password: "test123" }}
           onSubmit={(values) => dispatchLogin(values)}
           formName="login"
         >
