@@ -16,7 +16,9 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "quotes": "off"
+        "quotes": "off",
+        "comma-dangle": "off",
+        "no-shadow": "off"
     },
     "overrides": [
         {
