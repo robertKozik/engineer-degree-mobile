@@ -28,7 +28,6 @@ class CoreApi {
 
   setEndpointUrl(url: string) {
     this.api.defaults.baseURL = `${this.baseUrl}/${url}`;
-    console.log(this.api.defaults.baseURL);
   }
 
   setInterceptors(
@@ -48,7 +47,6 @@ class CoreApi {
     this.api.interceptors.request.use(
       async (config) => {
         const token = await SecureStore.getItemAsync("token");
-        console.log(token);
         if (token) {
           config.headers.Authorization = "Bearer " + token;
         }

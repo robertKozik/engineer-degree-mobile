@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "rgba(0.5, 0.25, 0, 0.2)",
   },
   pressable: {
     width: "100%",

@@ -1,18 +1,29 @@
 import React from "react";
 import { View } from "react-native";
 import styles from "../style";
-import { RootState } from "../../../redux/store";
+import { AppDispatch, RootState } from "../../../redux/store";
 import { Form } from "../../../components";
 import { connect } from "react-redux";
 import { Card } from "react-native-elements";
+import { changeConfig } from "../../../redux/stateSlices/module/thunks";
+import { informationNode } from "../../../interfaces";
 
-const ConfigPage = ({ modules }) => {
-  const { config } = modules[0];
+const ConfigPage = ({ route, modules, submit }: any) => {
+  const { id } = route.params;
+  const { config } = modules.find(
+    (el: informationNode) => el.id === Number(id)
+  );
   return (
     <View style={styles.wrapper}>
-      <Form initialValues={config} onSubmit={() => {}} formName="config">
+      <Form
+        initialValues={config}
+        onSubmit={(values) => {
+          submit(id, values);
+        }}
+        formName="config"
+      >
         <Card style={styles.card}>
-          <Card.Title>TITLE</Card.Title>
+          <Card.Title>MODULE CONFIGURATION</Card.Title>
           <Card.Divider />
           <View>
             <Form.Slider
@@ -20,11 +31,11 @@ const ConfigPage = ({ modules }) => {
               label="Sampling rate"
               icon="thermometer"
               min={0}
-              max={25}
+              max={60}
               step={1}
             />
             <Form.CheckBox
-              label="Temperature sensor"
+              label="Temp sensor"
               icon="thermometer"
               name="temperature_sensor"
             />
@@ -35,7 +46,7 @@ const ConfigPage = ({ modules }) => {
             />
             <Form.CheckBox
               label="Light sensor"
-              icon="mail"
+              icon="sun"
               name="light_sensor"
             />
             <Form.Submit loading={false} />
@@ -50,4 +61,9 @@ const mapStateToProps = (state: RootState) => ({
   modules: state.modules.modules,
 });
 
-export default connect(mapStateToProps)(ConfigPage);
+const mapDispatchToProps = (dispatch: AppDispatch) => ({
+  submit: (moduleId: number, values: Object) =>
+    dispatch(changeConfig({ moduleId, config: values })),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConfigPage);

@@ -52,6 +52,8 @@ type TextInputType = {
   placeholder: string;
   icon: string;
   name: string;
+  disabled?: boolean;
+  isPassword?: boolean;
 };
 
 type CheckBoxType = {
@@ -124,6 +126,8 @@ Form.TextInput = function TextInput({
   placeholder,
   icon,
   name,
+  disabled,
+  isPassword,
 }: TextInputType) {
   const { errors, handleChange, handleBlur, values } = useFormikContext();
   return (
@@ -134,6 +138,8 @@ Form.TextInput = function TextInput({
       label={label || name}
       leftIcon={{ name: icon }}
       placeholder={placeholder}
+      disabled={disabled}
+      secureTextEntry={isPassword}
       errorMessage={(errors as any)[name]}
     />
   );

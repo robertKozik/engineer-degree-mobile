@@ -6,7 +6,7 @@ import {
 } from "@react-navigation/drawer";
 import { View, Dimensions } from "react-native";
 import LanguagePicker from "../components/languagePicker";
-import { Home, Notifications } from "../pages";
+import { Home, ModulePage, Notifications } from "../pages";
 import routes from "../constants/routes";
 import { AppDispatch } from "../redux/store";
 import { fetchUser } from "../redux/stateSlices/auth";
@@ -47,6 +47,7 @@ const AuthNavigator = ({ getUserData }: { getUserData: Function }) => {
     >
       <Drawer.Screen name={routes.home} component={Home} />
       <Drawer.Screen name={routes.notifications} component={Notifications} />
+      <Drawer.Screen name="module" component={ModulePage} />
     </Drawer.Navigator>
   );
 };

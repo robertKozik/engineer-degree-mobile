@@ -25,7 +25,7 @@ const Login = ({
         </Card.Title>
         <Card.Divider />
         <Form
-          initialValues={{ email: "testowy15@test.com", password: "test123" }}
+          initialValues={{ email: "testowy@test.com", password: "test123" }}
           onSubmit={(values) => dispatchLogin(values)}
           formName="login"
         >
@@ -40,6 +40,7 @@ const Login = ({
             placeholder={t("login:passwordInputPlaceholder")}
             icon="lock"
             name="password"
+            isPassword
           />
           <Form.Submit loading={isLoginProcessing} />
         </Form>

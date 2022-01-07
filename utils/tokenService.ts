@@ -8,7 +8,6 @@ export async function getToken(): string {
 }
 
 export async function setToken(token: string): Promise<void> {
-  console.log(token);
   return await SecureStore.setItemAsync("token", token);
 }
 

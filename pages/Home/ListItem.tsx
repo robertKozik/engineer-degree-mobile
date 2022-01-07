@@ -1,8 +1,8 @@
 import React from "react";
-import { useLinkTo } from "@react-navigation/native";
-import { ListItem, Avatar } from "react-native-elements";
+import { useLinkProps } from "@react-navigation/native";
+import { ListItem, FAB } from "react-native-elements";
 import routes from "../../constants/routes";
-import { List } from "../../components";
+import { Form, List, Modal } from "../../components";
 import { StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
@@ -13,12 +13,13 @@ type ItemShape = {
   photo_url?: string | undefined;
   title: string;
   subtitle: string;
+  id: number;
 };
 
-const ListLink = ({ children }: { children: Array<React.ReactChild> }) => {
-  const linkTo = useLinkTo();
+const ListLink = ({ to, action, children, ...rest }: any) => {
+  const { onPress, ...props } = useLinkProps({ to, action });
   return (
-    <ListItem bottomDivider onPress={() => linkTo(`/${routes.moduleOverview}`)}>
+    <ListItem bottomDivider onPress={onPress} {...props} {...rest}>
       {children}
     </ListItem>
   );
@@ -26,7 +27,7 @@ const ListLink = ({ children }: { children: Array<React.ReactChild> }) => {
 
 const renderItem = ({ item }: { item: ItemShape }) => {
   return (
-    <ListLink>
+    <ListLink to={{ screen: routes.module, params: { id: item.id } }}>
       {/* {item.photo_url ? (
         <Avatar rounded source={{ uri: item.photo_url }} />
       ) : (
@@ -48,7 +49,6 @@ const ModuleList = ({
   modules: Array<informationNode>;
   getAllModules: Function;
 }) => {
-  console.log(modules);
   React.useEffect(() => {
     getAllModules();
   }, [getAllModules]);
@@ -59,6 +59,7 @@ const ModuleList = ({
         photo_url: undefined,
         title: el.name,
         subtitle: el.serial_id,
+        id: el.id,
       })),
     [modules]
   );
@@ -66,6 +67,21 @@ const ModuleList = ({
   return (
     <View style={styles.container}>
       <List data={mappedData} renderItemFunc={renderItem} />
+      <Modal animationType="fade" type="button" title="Add plant module">
+        <Form
+          initialValues={{ serial_id: "" }}
+          onSubmit={() => {}}
+          formName="login"
+        >
+          <Form.TextInput
+            name="serial_id"
+            label="serial number"
+            placeholder="xxxxxx"
+            icon="mail"
+          />
+          <Form.Submit loading={false} />
+        </Form>
+      </Modal>
     </View>
   );
 };
@@ -76,6 +92,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+    paddingBottom: 20,
   },
 });
 

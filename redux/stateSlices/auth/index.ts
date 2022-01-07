@@ -16,7 +16,6 @@ export const authSlice: Slice<authState> = createSlice({
         state.isLoginProcessing = false;
       })
       .addCase(fetchUser.fulfilled, (state, response: any) => {
-        console.log(response.payload);
         state.user.email = response.email;
         state.user.connectedNodes = response?.modules || response?.module;
       })
@@ -26,9 +25,7 @@ export const authSlice: Slice<authState> = createSlice({
       .addMatcher(
         isAnyOf(loginUser.rejected, registerUser.rejected),
         (state, response: any) => {
-          console.warn(response);
           state.isLoginProcessing = false;
-          console.warn(response.message);
         }
       );
   },
