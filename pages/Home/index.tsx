@@ -1,23 +1,21 @@
-import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import React from "react";
+import { createStackNavigator } from "@react-navigation/stack";
+import routes from "../../constants/routes";
+import ModulePage from "../ModulePage";
+import ModuleList from "./ListItem";
 
-interface props {
-    navigation: any
-}
+const Stack = createStackNavigator();
 
-export default function LoginPage({ navigation }: props) {
+const Home = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
+    <Stack.Navigator
+      screenOptions={{ headerShown: false }}
+      initialRouteName={routes.moduleList}
+    >
+      <Stack.Screen name={routes.moduleList} component={ModuleList} />
+      <Stack.Screen name={routes.module} component={ModulePage} />
+    </Stack.Navigator>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default Home;

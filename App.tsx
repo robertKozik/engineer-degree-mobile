@@ -1,18 +1,22 @@
-import 'react-native-gesture-handler';
-import * as React from 'react';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
-import { Home, Notifications } from './pages';
+import "react-native-gesture-handler";
+import * as React from "react";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import CustomThemeProvider from "./components/CustomThemeProvider";
+import "./i18n.config";
+import Navigation from "./routes";
+import { store } from "./redux/store";
+import { Provider } from "react-redux";
 
-const Drawer = createDrawerNavigator();
-
-export default function App() {
+const App = () => {
   return (
-    <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Home" component={Home} />
-        <Drawer.Screen name="Notifications" component={Notifications} />
-      </Drawer.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <SafeAreaProvider>
+        <CustomThemeProvider>
+          <Navigation />
+        </CustomThemeProvider>
+      </SafeAreaProvider>
+    </Provider>
   );
-}
+};
+
+export default App;
